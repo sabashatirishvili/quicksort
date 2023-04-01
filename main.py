@@ -1,19 +1,31 @@
 def quicksort(arr):
     if len(arr) <= 1:
         return arr
-    else:
-        pivot = arr[0]
-        left = []
-        equal = []
-        right = []
-        for i in arr:
-            if i < pivot:
-                left.append(i)
-            elif i == pivot:
-                equal.append(i)
-            else:
-                right.append(i)
-        return quicksort(left) + equal + quicksort(right)
+    
+    # საყრდენი - პირველი, ბოლო და შუა ელემენტების მედიანი
+    first = arr[0]
+    middle = arr[len(arr) // 2]
+    last = arr[-1]
+    pivot = sorted([first, middle, last])[1]
+    
+    # მასივი დავანაწილოთ ქვესიმრავლეებად რომლებიც არიან საყრდენზე ნაკლები, მეტი ან მისი ტოლი
+    less = []
+    equal = []
+    greater = []
+    for element in arr:
+        if element < pivot:
+            less.append(element)
+        elif element == pivot:
+            equal.append(element)
+        else:
+            greater.append(element)
+    
+    # საყრდენზე მეტი და ნაკლები ქვემასივების დახარისხება რეკურსიულად
+    sorted_less = quicksort(less)
+    sorted_greater = quicksort(greater)
+    
+    # დახარისხებული მასივების შეერთება და საბოლოო შედეგის მიღება
+    return sorted_less + equal + sorted_greater
 
 
 
