@@ -4,16 +4,19 @@ def quicksort(arr):
     else:
         pivot = arr[0]
         left = []
+        equal = []
         right = []
-        for i in range(1, len(arr)):
-            if arr[i] < pivot:
-                left.append(arr[i])
+        for i in arr:
+            if i < pivot:
+                left.append(i)
+            elif i == pivot:
+                equal.append(i)
             else:
-                right.append(arr[i])
-    return quicksort(left) + [pivot] +  quicksort(right)
+                right.append(i)
+        return quicksort(left) + equal + quicksort(right)
 
 
 
-arr = [9, 3, 2, 5, 6, 7,8, 23 ,13, 11, 42, 1 ,55, 3232, 424, 12]
+arr = [9, 3, 2, 5, 6, 7,8, 23 ,13, 11, 42, 1 ,55, 3232, 22, 12]
 
 print(quicksort(arr))
